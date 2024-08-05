@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perilleo Session</title>
+    <link rel="icon" href="/favicon.png" type="image/png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/js/all.min.js" crossorigin="anonymous"></script>
+    <style>
+        .knob-container {
+            position: relative;
+        }
+
+        .battery {
+            width: 100%;
+            height: 50px;
+            background-color: #e2e8f0;
+            border: 6px solid #1e293b;
+            position: relative;
+            margin: auto;
+            display: flex;
+            align-items: center; /* Center vertically */
+            justify-content: center; /* Center horizontally */
+            border-radius: 25px;
+        }
+
+        .inner-battery {
+            width: 95%; /* Adjust this value for the desired inner size */
+            height: 30px; /* Adjust this value for the desired inner size */
+            background-color: #e2e8f0;
+            border: 4px solid #1e293b;
+            border-radius: 20px;
+        }
+
+        .battery-level {
+            border-radius: 10px;
+            height: 100%;
+            background-color: #00fe00;
+        }
+
+        .toggle-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+        }
+        .knob-name-input {
+            width: 100%;
+            text-align: center;
+            overflow-wrap: break-word;
+            resize: none; /* Prevent resizing */
+        }
+        .button-container {
+            position: relative;
+            margin-top: 20px;
+        }
+        .button {
+            width: 50px;
+            height: 50px;
+            border: 2px solid #1e293b;
+            border-radius: 50%;
+            background-color: white;
+            margin: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .button.active {
+            background-color: black;
+        }
+        .button-name-input {
+            width: 100%;
+            text-align: center;
+            overflow-wrap: break-word;
+            resize: none; /* Prevent resizing */
+        }
+        .key-trigger {
+            font-size: 15px;
+            color: #1e293b;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 5px;
+        }
+        .key-symbol {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen bg-gray-100 relative">
+
+<div class="toggle-button" onclick="toggleSpeech()">
+    <i class="fa fa-volume-up fa-2x" id="speaker-up-icon"></i>
+    <i class="fa fa-volume-mute fa-2x" id="speaker-mute-icon"></i>
+</div>
+<div>
+<div>
+    <div class="grid grid-cols-1 gap-10 text-center">
+        <h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl md:text-6xl">Perilleo Session</h1>
+        <span class="text-xl font-bold tracking-tight text-gray-900 sm:text-xl md:text-xl p-6">Necesitas un teclado para jugar. Usá las teclas para manejar los botones y perillas. Editá el texto que quieras. Las cosas entre paréntesis no son dichas por el sintetizador de voz, sirven como notas.</span>
+    </div>
+    <div class="grid grid-cols-5 gap-10 text-center">
+        <div class="knob-container">
+            <span class="key-trigger">W / S</span>
+            <div class="battery" id="knob1"><div class="inner-battery"><div class="battery-level" id="battery-level1" style="width: 0%;"></div></div>
+            </div>
+            <p id="knob1-level" class="mt-1 text-gray-500">0%</p>
+            <textarea id="knob1-name" class="mt-4 text-lg font-semibold knob-name-input" rows="3" cols="20">Juegos de Impacto (en las nalgas)</textarea>
+        </div>
+        <div class="knob-container">
+            <span class="key-trigger">E / D</span>
+            <div class="battery" id="knob2"><div class="inner-battery"><div class="battery-level" id="battery-level2" style="width: 0%;"></div></div></div>
+            <p id="knob2-level" class="mt-1 text-gray-500">0%</p>
+            <textarea id="knob2-name" class="mt-4 text-lg font-semibold knob-name-input" rows="3" cols="20">Humillación Psicológica (Sobre que soy muy idiota)</textarea>
+        </div>
+        <div class="knob-container">
+            <span class="key-trigger">R / F</span>
+            <div class="battery" id="knob3"><div class="inner-battery"><div class="battery-level" id="battery-level3" style="width: 0%;"></div></div></div>
+            <p id="knob3-level" class="mt-1 text-gray-500">0%</p>
+            <textarea id="knob3-name" class="mt-4 text-lg font-semibold knob-name-input" rows="3" cols="20">Gritame</textarea>
+        </div>
+        <div class="knob-container">
+            <span class="key-trigger">T / G</span> 
+            <div class="battery" id="knob4"><div class="inner-battery"><div class="battery-level" id="battery-level4" style="width: 0%;"></div></div></div>
+            <p id="knob4-level" class="mt-1 text-gray-500">0%</p>            
+            <textarea id="knob4-name" class="mt-4 text-lg font-semibold knob-name-input" rows="3" cols="20">Otra perilla</textarea>
+        </div>
+        <div class="knob-container">
+            <span class="key-trigger">Y / H</span>
+            <div class="battery" id="knob5"><div class="inner-battery"><div class="battery-level" id="battery-level5" style="width: 0%;"></div></div></div>
+            <p id="knob5-level" class="mt-1 text-gray-500">0%</p>
+            <textarea id="knob5-name" class="mt-4 text-lg font-semibold knob-name-input" rows="3" cols="20">Otra perilla</textarea>
+        </div>
+    </div>
+    
+    <div class="grid grid-cols-5 gap-10 text-center button-container mt-10">
+        <div>
+            <span class="key-trigger">X</span>
+            <div class="button" id="button1"></div>
+            <textarea id="button1-name" class="mt-4 text-lg font-semibold button-name-input" rows="1" cols="10">Aia</textarea>
+        </div>
+        <div>
+            <span class="key-trigger">C</span>
+            <div class="button" id="button2"></div>
+            <textarea id="button2-name" class="mt-4 text-lg font-semibold button-name-input" rows="1" cols="10">Dale que me aburro</textarea>
+        </div>
+        <div>
+            <span class="key-trigger">V</span>
+            <div class="button" id="button3"></div>
+            <textarea id="button3-name" class="mt-4 text-lg font-semibold button-name-input" rows="1" cols="10">Viva Perón</textarea>
+        </div>
+        <div>
+            <span class="key-trigger">B</span>
+            <div class="button" id="button4"></div>
+            <textarea id="button4-name" class="mt-4 text-lg font-semibold button-name-input" rows="1" cols="10">Otro botón</textarea>
+        </div>
+        <div>
+            <span class="key-trigger">N</span>
+            <div class="button" id="button5"></div>
+            <textarea id="button5-name" class="mt-4 text-lg font-semibold button-name-input" rows="1" cols="10">Otro botón</textarea>
+        </div>
+    </div>
+    
+</div>
+
+<script>
+    let speechEnabled = false;
+
+    const knobs = [
+        { element: document.getElementById('knob1'), levelElement: document.getElementById('knob1-level'), batteryElement: document.getElementById('battery-level1'), level: 0 },
+        { element: document.getElementById('knob2'), levelElement: document.getElementById('knob2-level'), batteryElement: document.getElementById('battery-level2'), level: 0 },
+        { element: document.getElementById('knob3'), levelElement: document.getElementById('knob3-level'), batteryElement: document.getElementById('battery-level3'), level: 0 },
+        { element: document.getElementById('knob4'), levelElement: document.getElementById('knob4-level'), batteryElement: document.getElementById('battery-level4'), level: 0 },
+        { element: document.getElementById('knob5'), levelElement: document.getElementById('knob5-level'), batteryElement: document.getElementById('battery-level5'), level: 0 }
+    ];
+
+    const buttons = [
+        { element: document.getElementById('button1'), nameElement: document.getElementById('button1-name'), key: 'x' },
+        { element: document.getElementById('button2'), nameElement: document.getElementById('button2-name'), key: 'c' },
+        { element: document.getElementById('button3'), nameElement: document.getElementById('button3-name'), key: 'v' },
+        { element: document.getElementById('button4'), nameElement: document.getElementById('button4-name'), key: 'b' },
+        { element: document.getElementById('button5'), nameElement: document.getElementById('button5-name'), key: 'n' }
+    ];
+
+    // Variable to track if a textarea is selected
+    let isTextareaSelected = false;
+
+    // Function to set the variable to true when a textarea is focused
+    function handleFocus() {
+        isTextareaSelected = true;
+    }
+
+    // Function to set the variable to false when a textarea loses focus
+    function handleBlur() {
+        isTextareaSelected = false;
+    }
+
+    // Get all textarea elements in the document
+    const textareas = document.querySelectorAll('textarea');
+
+    // Attach event listeners to each textarea
+    textareas.forEach(textarea => {
+        textarea.addEventListener('focus', handleFocus);
+        textarea.addEventListener('blur', handleBlur);
+    });
+
+    document.addEventListener('keydown', (event) => {
+        switch (event.key) {
+            case 'w':
+                adjustBattery(0, 1);
+                break;
+            case 's':
+                adjustBattery(0, -1);
+                break;
+            case 'e':
+                adjustBattery(1, 1);
+                break;
+            case 'd':
+                adjustBattery(1, -1);
+                break;
+            case 'r':
+                adjustBattery(2, 1);
+                break;
+            case 'f':
+                adjustBattery(2, -1);
+                break;
+            case 't':
+                adjustBattery(3, 1);
+                break;
+            case 'g':
+                adjustBattery(3, -1);
+                break;
+            case 'y':
+                adjustBattery(4, 1);
+                break;
+            case 'h':
+                adjustBattery(4, -1);
+                break;
+            case 'x':
+                pressButton(0);
+                break;
+            case 'c':
+                pressButton(1);
+                break;
+            case 'v':
+                pressButton(2);
+                break;
+            case 'b':
+                pressButton(3);
+                break;
+            case 'n':
+                pressButton(4);
+                break;
+        }
+    });
+
+    const max_level = 4;
+
+    function adjustBattery(index, direction) {
+        if (isTextareaSelected){
+            return;
+        }
+        const knob = knobs[index];
+
+        const newLevel = knob.level + direction;
+        if (newLevel >= 0 && newLevel <= max_level) {
+            knob.level = newLevel;
+        }
+
+        const percentage = Math.round((knob.level) * (100/max_level));
+        knob.batteryElement.style.width = `${percentage}%`;
+        knob.levelElement.textContent = `${percentage}%`;
+
+        // Get the knob name
+        const knobName = document.getElementById(`knob${index + 1}-name`).value;
+        const cleanedKnobName = knobName.replace(/\(.*?\)/g, '').trim();
+
+        let utterance = new SpeechSynthesisUtterance(`${cleanedKnobName} nivel ${knob.level}`);
+
+        if (knob.level == max_level) {
+            utterance = new SpeechSynthesisUtterance(`${cleanedKnobName} nivel máximo`);
+        }
+
+        if (knob.level == 0) {
+            utterance = new SpeechSynthesisUtterance(`${cleanedKnobName} desactivado`);
+        }
+
+        if (speechEnabled) {
+
+            utterance.lang = 'es-AR'; // Set the language to Spanish
+            utterance.rate = 1.3; // Adjust the rate as needed
+
+            // Cancel any ongoing speech and speak the updated value
+            window.speechSynthesis.cancel();
+            window.speechSynthesis.speak(utterance);
+        }
+    }
+
+    function pressButton(index) {
+        if (isTextareaSelected){
+            return;
+        }
+        const button = buttons[index];
+        button.element.classList.add('active');
+        const buttonName = button.nameElement.value;
+
+        if (speechEnabled) {
+            // Create the speech synthesis utterance
+            const utterance = new SpeechSynthesisUtterance(buttonName);
+            utterance.lang = 'es-AR'; // Set the language to Spanish
+            utterance.rate = 1.2; // Adjust the rate as needed
+
+            // Cancel any ongoing speech and speak the button name
+            window.speechSynthesis.cancel();
+            window.speechSynthesis.speak(utterance);
+        }
+
+        setTimeout(() => {
+            button.element.classList.remove('active');
+        }, 200);
+    }
+
+    function toggleSpeech() {
+        let speakerUpIcon = document.getElementById('speaker-up-icon');
+        let speakerMuteIcon = document.getElementById('speaker-mute-icon');
+        
+        speechEnabled = !speechEnabled;
+        if (speechEnabled) {
+            speakerMuteIcon.style.display = 'none';
+            speakerUpIcon.style.display = 'inline';
+        } else {
+            speakerUpIcon.style.display = 'none';
+            speakerMuteIcon.style.display = 'inline';
+        }
+    }
+
+    // Initialize the icon display state
+    toggleSpeech();  // This ensures the correct icon is displayed on page load
+</script>
+
+</body>
+</html>

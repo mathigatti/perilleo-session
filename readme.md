@@ -1,0 +1,5 @@
+# Perilleo Session
+
+La idea es que a veces durante una sesión se juega con distintas cosas, por ejemplo juegos de impacto en el culo + humillación psicologica + degradacion fisica. Y a veces la persona bottom quizás quiere subirle a una de esas variables pero bajarle a otra, capaz se le canso el culo pero quiere mas humillación psicologica. Y capaz comunicar eso corta un poco el flow. Asi que una solución podria ser conocerse mucho y que la persona top vaya subiendo de a poquito cada variable y percibiendo que onda como se toma cada cosa + usando semaforo o algún otro protocolo.
+
+PERO el otro dia charlando con @KinkyToymaker pensamos en esta pequeña herramienta web que permite que le bottom perillee lo que quiere. La idea es manejarlo con un teclado inalambrico. La persona bottom tiene el teclado, donde por ejemplo la W y la S suben y bajan la perilla de humillación psicologica. la E y la D suben y bajan la perilla de juegos de impacto. El sitio con las perillas se proyecta en una pared o se pone con una voz sintetica que va diciendo algo onda "HUMILLACIÓN PSICOLOGICA NIVEL 3" para que lx top pueda ver/escuchar y guiarse de eso para accionar
